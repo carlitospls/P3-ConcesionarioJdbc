@@ -18,7 +18,7 @@
         <tr th:each="m : ${marcas}">
             <td th:text="${m.codigo}">1</td>
             <td>
-            <a th:href="@{/marcas/{codigo}/coches(codigo=${co.codigo})}"
+            <a th:href="@{/marcas/{codigo}/coches(codigo=${m.codigo})}"
             th:text="${m.nombre}">Nombre </a>
             </td>
 
