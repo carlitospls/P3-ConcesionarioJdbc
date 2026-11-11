@@ -1,6 +1,7 @@
 package es.daw.concesionariojdbc.repository;
 
 import es.daw.concesionariojdbc.exception.AccesoDatosException;
+import es.daw.concesionariojdbc.model.Coche;
 import es.daw.concesionariojdbc.model.Marca;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static es.daw.concesionariojdbc.repository.CocheRepositoryJdbc.SELECT_BASE;
 
 @Repository
 @RequiredArgsConstructor
@@ -91,5 +94,28 @@ public class MarcaRepositoryJdbc implements MarcaRepository {
 
     private Marca mapRow(ResultSet rs) throws SQLException {
         return new Marca(rs.getInt("codigo"), rs.getString("nombre"));
+    }
+
+
+    @Override
+    public List<Coche> findByMarcaCodigo(Integer codigoMarca) {
+        String sql = SELECT_BASE + "WHERE co.codigo_fabricante = ? ORDER BY co.nombre"; // por defecto es ASC
+
+        List<Coche> coches = new ArrayList<>();
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codigoMarca);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    coches.add(mapRow(rs));
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new AccesoDatosException("Error al listar los productos del fabricante " + codigoMarca, e);
+        }
+
+        return coches;
     }
 }

@@ -103,6 +103,7 @@ public class CocheRepositoryJdbc implements CocheRepository {
         }
     }
 
+    //
     @Override
     public boolean existsByMarcaCodigo(Integer codigoMarca) {
         String sql = "SELECT 1 FROM coche WHERE codigo_marca = ?";
@@ -117,6 +118,7 @@ public class CocheRepositoryJdbc implements CocheRepository {
                     "Error al comprobar los coches de la marca " + codigoMarca, e);
         }
     }
+
 
     // Fila del ResultSet → objeto Coche
     private Coche mapRow(ResultSet rs) throws SQLException {
