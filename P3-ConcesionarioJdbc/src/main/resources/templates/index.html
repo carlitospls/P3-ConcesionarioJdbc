@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Inicio')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="contenedor">
+    <h1>AutoNova</h1>
+    <p class="suave">Gestión del catálogo del concesionario</p>
+    <div class="tarjetas">
+        <a class="tarjeta" th:href="@{/coches}">
+            <h2>Coches</h2>
+            <p>Consulta, añade, edita o borra coches del catálogo.</p>
+        </a>
+        <a class="tarjeta" th:href="@{/marcas}">
+            <h2>Marcas</h2>
+            <p>Lista de marcas del catálogo.</p>
+        </a>
+    </div>
+</main>
+</body>
+</html>
