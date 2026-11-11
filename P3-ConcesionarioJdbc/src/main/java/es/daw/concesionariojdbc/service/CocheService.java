@@ -49,7 +49,7 @@ public class CocheService {
     public List<Coche> listarPorMarca(Integer codigoMarca) {
 
         // Regla de negocio: comprobar que el codigoFabricante existe...
-        marcaRepository.findByMarcaCodigo(codigoMarca).orElseThrow(
+        marcaRepository.findById(codigoMarca).orElseThrow(
                 () -> new RecursoNoEncontradoException("No existe el fabricante con código "+ codigoMarca));
 
         return cocheRepository.findByMarcaCodigo(codigoMarca);

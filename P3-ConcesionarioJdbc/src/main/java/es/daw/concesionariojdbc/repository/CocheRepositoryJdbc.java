@@ -118,6 +118,27 @@ public class CocheRepositoryJdbc implements CocheRepository {
                     "Error al comprobar los coches de la marca " + codigoMarca, e);
         }
     }
+    @Override
+    public List<Coche> findByMarcaCodigo(Integer codigoMarca) {
+        String sql = SELECT_BASE + "WHERE co.codigo_marca = ? ORDER BY co.precio"; // por defecto es ASC
+
+        List<Coche> coches = new ArrayList<>();
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codigoMarca);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    coches.add(mapRow(rs));
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new AccesoDatosException("Error al listar los productos del fabricante " + codigoMarca, e);
+        }
+
+        return coches;
+    }
 
 
     // Fila del ResultSet → objeto Coche

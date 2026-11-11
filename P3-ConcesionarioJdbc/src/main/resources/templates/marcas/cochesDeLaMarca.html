@@ -14,7 +14,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="text-success">
             <!-- El fabricante llega aparte en el modelo: si no tiene productos, también hay título -->
-            🏭 <span th:text="${marca.nombre}"></span>
+            🏭 <span th:text="'Coches de '+ ${marca.nombre}"></span>
             <!-- |...| es sustitución literal: mezcla texto y expresiones sin concatenar con + -->
             <small class="text-muted fs-5" th:text="|${#lists.size(coches)} coches|">(0 coches)</small>
         </h2>
@@ -35,7 +35,7 @@
         <tbody>
         <!-- colspan="3": la fila ocupa las tres columnas de la tabla -->
         <tr th:if="${#lists.isEmpty(productos)}">
-            <td colspan="3" class="text-center text-muted">Este fabricante no tiene productos</td>
+            <td colspan="3" class="text-center text-muted">Esta marca no tiene coches</td>
         </tr>
         <tr th:each="co : ${coches}">
             <td th:text="${co.codigo}">1</td>
@@ -47,6 +47,5 @@
     </table>
 </div>
 
-<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
 </body>
 </html>

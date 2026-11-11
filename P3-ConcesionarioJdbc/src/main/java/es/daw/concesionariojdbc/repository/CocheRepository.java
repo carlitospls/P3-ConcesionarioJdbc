@@ -10,5 +10,7 @@ public interface CocheRepository extends GenericRepository<Coche, Integer> {
     /** ¿Hay algún coche de esta marca? */
     boolean existsByMarcaCodigo(Integer codigoMarca);
 
+    List<Coche> findByMarcaCodigo(Integer codigoMarca);
+
 
 }

@@ -1,5 +1,6 @@
 package es.daw.concesionariojdbc.service;
 
+import es.daw.concesionariojdbc.exception.RecursoNoEncontradoException;
 import es.daw.concesionariojdbc.model.Marca;
 import es.daw.concesionariojdbc.repository.MarcaRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,4 +17,12 @@ public class MarcaService {
     public List<Marca> listar() {
         return marcaRepository.findAll();
     }
+
+    public Marca buscarPorCodigo(Integer codigo) {
+        return marcaRepository.findById(codigo)
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No existe el fabricante con código " + codigo));
+    }
+
+
 }

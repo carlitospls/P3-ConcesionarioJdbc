@@ -1,6 +1,5 @@
 package es.daw.concesionariojdbc.controller;
 
-import es.daw.concesionariojdbc.repository.MarcaRepository;
 import es.daw.concesionariojdbc.service.CocheService;
 import es.daw.concesionariojdbc.service.MarcaService;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +23,11 @@ public class MarcaController {
         return "marcas/lista";
     }
 
-    @GetMapping("/{codigo}/coches}")
+    @GetMapping("/{codigo}/coches")
     public String cochesDeLaMarca(@PathVariable("codigo") Integer codigoMarca, Model model) {
 
-        model.addAttribute("marcas",  marcaService.listar());
-        model.addAttribute("coches", cocheService.listar());
+        model.addAttribute("marca", marcaService.buscarPorCodigo(codigoMarca) );
+        model.addAttribute("coches", cocheService.listarPorMarca(codigoMarca));
 
         return "marcas/cochesDeLaMarca";
     }

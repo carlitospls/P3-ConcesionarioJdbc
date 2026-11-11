@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface MarcaRepository extends GenericRepository<Marca, Integer> {
 
-    List<Coche> findByMarcaCodigo(Integer codigoMarca);
 
 }
