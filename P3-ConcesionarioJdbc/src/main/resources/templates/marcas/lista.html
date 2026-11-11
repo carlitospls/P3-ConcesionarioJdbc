@@ -17,10 +17,11 @@
         <tbody>
         <tr th:each="m : ${marcas}">
             <td th:text="${m.codigo}">1</td>
-            <td th:text="${m.nombre}">Nombre</td>
             <td>
-                <a th:href="@{/coches/editar/{codigo}(codigo=${p.codigo})}" class="boton amarillo">Editar</a>
+            <a th:href="@{/marcas/{codigo}/coches(codigo=${co.codigo})}"
+            th:text="${m.nombre}">Nombre </a>
             </td>
+
         </tr>
         </tbody>
     </table>
